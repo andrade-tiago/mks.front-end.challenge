@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 import COLORS from "./src/styles/colors";
+import FONT_FAMILIES from "./src/styles/fonts";
 
 export default {
   content: [
@@ -10,6 +11,7 @@ export default {
   theme: {
     extend: {
       colors: COLORS,
+      fontFamily: FONT_FAMILIES,
     },
   },
   plugins: [],
