@@ -1,8 +1,10 @@
 import tw from "tailwind-styled-components"
 import CloseButton from "./CloseButton"
 import ShoppingCartListItem from "./ShoppingCartListItem"
+import useShoppingCartStore from "@/store/use-shopping-cart-store"
+import { AnimatePresence, motion } from "framer-motion"
 
-const Wrapper = tw.div`
+const Wrapper = tw(motion.div)`
   fixed top-0 right-0
   bg-primary
   shadow-2xl
@@ -16,11 +18,9 @@ const Row = tw.div`
 const Text = tw.span`
   text-white text-2xl font-bold
 `
-const Title = tw(Text)`
+const Title = tw(motion.h2)`
+  text-white text-2xl font-bold
   max-w-44
-`
-const CloseMenuButton = tw(CloseButton)`
-  translate-x-full
 `
 const ItemList = tw.div`
   overflow-y-auto
@@ -34,35 +34,51 @@ const BuyButton = tw.button`
 `
 
 const ShoppingCartList = (): JSX.Element => {
+  const shoppingCart = useShoppingCartStore()
+
   return (
-    <Wrapper>
-        <Row>
-          <Title $as="h2">
-            Carrinho de compras
-          </Title>
+    <AnimatePresence>
+      {shoppingCart.isOpen && (
+        <Wrapper
+          initial={{ x: 600 }}
+          animate={{ x: 0 }}
+          exit={{ x: 600 }}
+        >
+          <Row>
+            <Title
+              initial={{ y: -200 }}
+              animate={{ y: 0 }}
+            >
+              Carrinho de compras
+            </Title>
 
-          <CloseMenuButton size={20} />
-        </Row>
+            <CloseButton
+              size={20}
+              onClick={() => shoppingCart.setIsOpen(false)}
+            />
+          </Row>
 
-        <ItemList>
-          {new Array(10).fill(<ShoppingCartListItem />)}
-        </ItemList>
+          <ItemList>
+            {new Array(10).fill(<ShoppingCartListItem />)}
+          </ItemList>
 
-        <Row>
-          <Text>
-            Total:
-          </Text>
+          <Row>
+            <Text>
+              Total:
+            </Text>
 
-          <Text>
-            R$456
-          </Text>
-        </Row>
-      <BuyButton>
-        <Text>
-          Finalizar Compra
-        </Text>
-      </BuyButton>
-    </Wrapper>
+            <Text>
+              R$456
+            </Text>
+          </Row>
+          <BuyButton>
+            <Text>
+              Finalizar Compra
+            </Text>
+          </BuyButton>
+        </Wrapper>
+      )}
+    </AnimatePresence>
   )
 }
 

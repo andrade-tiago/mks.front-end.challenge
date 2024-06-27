@@ -8,8 +8,8 @@ const Wrapper = tw.section`
   shadow-sm
 `
 const Container = tw.div`
-  p-2
-  flex flex-col gap-2
+  p-3
+  flex flex-col gap-3
 `
 const ProductImage = tw.img`
   w-full max-h-36
@@ -22,7 +22,7 @@ const Title = tw.h3`
   text-black text-base font-normal
 `
 const Price = tw.span`
-  bg-black
+  bg-zinc-700
   text-white text-base font-bold
   rounded-md
   p-1
