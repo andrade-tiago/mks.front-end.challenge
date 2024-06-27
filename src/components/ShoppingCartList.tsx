@@ -3,6 +3,7 @@ import CloseButton from "./CloseButton"
 import ShoppingCartListItem from "./ShoppingCartListItem"
 import useShoppingCartStore from "@/store/use-shopping-cart-store"
 import { AnimatePresence, motion } from "framer-motion"
+import currencyFormatter from "@/utils/currency-formatter"
 
 const Wrapper = tw(motion.div)`
   fixed top-0 right-0
@@ -22,10 +23,13 @@ const Title = tw(motion.h2)`
   text-white text-2xl font-bold
   max-w-44
 `
-const ItemList = tw.div`
-  overflow-y-auto
+const ItemList = tw.ul`
+  overflow-y-auto overflow-x-hidden
   flex flex-col gap-4 flex-1
   px-12 py-8
+`
+const NoItems = tw.p`
+  text-gray-200 text-md font-normal text-center
 `
 const BuyButton = tw.button`
   bg-black
@@ -35,6 +39,10 @@ const BuyButton = tw.button`
 
 const ShoppingCartList = (): JSX.Element => {
   const shoppingCart = useShoppingCartStore()
+
+  const totalPrice = shoppingCart.items.reduce((acc, item) => {
+    return acc + (item.amount * item.price)
+  }, 0)
 
   return (
     <AnimatePresence>
@@ -59,7 +67,15 @@ const ShoppingCartList = (): JSX.Element => {
           </Row>
 
           <ItemList>
-            {new Array(10).fill(<ShoppingCartListItem />)}
+            {shoppingCart.items.length > 0 ? (
+              shoppingCart.items.map(item => (
+                <ShoppingCartListItem key={item.id} itemId={item.id} />
+              ))
+            ) : (
+              <NoItems>
+                Adicione itens para visualizá-los no carrinho
+              </NoItems>
+            )}
           </ItemList>
 
           <Row>
@@ -68,7 +84,7 @@ const ShoppingCartList = (): JSX.Element => {
             </Text>
 
             <Text>
-              R$456
+              {currencyFormatter.format(totalPrice).split(',')[0]}
             </Text>
           </Row>
           <BuyButton>

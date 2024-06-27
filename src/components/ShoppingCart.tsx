@@ -1,5 +1,6 @@
 import tw from "tailwind-styled-components"
 import { TiShoppingCart } from "react-icons/ti"
+import useShoppingCartStore from "@/store/use-shopping-cart-store"
 
 const Wrapper = tw.button`
   bg-white
@@ -11,16 +12,14 @@ const Wrapper = tw.button`
 `
 const ItemsAmount = tw.span`font-bold`
 
-type ShoppingCartProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  itemsAmount: number
-}
+const ShoppingCart = (): JSX.Element => {
+  const shoppingCart = useShoppingCartStore()
 
-const ShoppingCart = ({ itemsAmount, ...props }: ShoppingCartProps): JSX.Element => {
   return (
-    <Wrapper {...props}>
+    <Wrapper onClick={() => shoppingCart.setIsOpen(true)}>
       <TiShoppingCart />
       <ItemsAmount>
-        {itemsAmount}
+        {shoppingCart.items.length}
       </ItemsAmount>
     </Wrapper>
   )

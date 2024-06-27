@@ -3,7 +3,7 @@ import Header from "@/components/Header"
 import ProductCard from "@/components/ProductCard"
 import ShoppingCart from "@/components/ShoppingCart"
 import ShoppingCartList from "@/components/ShoppingCartList"
-import useShoppingCartStore from "@/store/use-shopping-cart-store"
+import useProducts from "@/hooks/use-products"
 import tw from "tailwind-styled-components"
 
 const ShopWindow = tw.main`
@@ -13,21 +13,22 @@ const ShopWindow = tw.main`
 `
 
 const HomePage = (): JSX.Element => {
-  const shoppingCart = useShoppingCartStore()
+  const { data: productsList, isLoading, error } = useProducts({ pageNumber: 1 })
 
   return (
     <>
       <Header>
-        <ShoppingCart
-          itemsAmount={0}
-          onClick={() => shoppingCart.setIsOpen(true)}
-        />
+        <ShoppingCart />
       </Header>
 
       <ShoppingCartList />
 
       <ShopWindow>
-        {new Array(20).fill(<ProductCard />)}
+        {productsList?.products && (
+          productsList.products.map(item => (
+            <ProductCard key={item.id} product={item} />
+          ))
+        )}
       </ShopWindow>
 
       <Footer />
