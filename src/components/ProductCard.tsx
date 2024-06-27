@@ -41,7 +41,7 @@ const BuyButton = tw.button`
 `
 
 const ProductCard = (): JSX.Element => {
-  const imgURL = 'https://d1r6yjixh9u0er.cloudfront.net/Custom/Content/Products/47/95/4795_smartwatch-xiaomi-redmi-watch-3-active-x00756_z4_638277064233567177.jpg'
+  const imgURL = 'https://images.tokopedia.net/img/cache/700/VqbcmM/2023/9/26/298ffbef-785d-4645-b6d8-9c3a739650b7.png'
 
   return (
     <Wrapper>

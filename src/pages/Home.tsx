@@ -2,6 +2,7 @@ import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 import ProductCard from "@/components/ProductCard"
 import ShoppingCart from "@/components/ShoppingCart"
+import ShoppingCartList from "@/components/ShoppingCartList"
 import tw from "tailwind-styled-components"
 
 const ShopWindow = tw.main`
@@ -16,6 +17,8 @@ const HomePage = (): JSX.Element => {
       <Header>
         <ShoppingCart itemsAmount={0} />
       </Header>
+
+      <ShoppingCartList />
 
       <ShopWindow>
         {new Array(20).fill(<ProductCard />)}
