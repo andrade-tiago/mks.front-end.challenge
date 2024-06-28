@@ -5,6 +5,7 @@ import ShoppingCart from "@/components/ShoppingCart"
 import ShoppingCartList from "@/components/ShoppingCartList"
 import useProducts from "@/hooks/use-products"
 import { Skeleton } from "@nextui-org/skeleton"
+import { useEffect } from "react"
 import tw from "tailwind-styled-components"
 
 const ShopWindow = tw.main`
@@ -20,7 +21,11 @@ const LoadingCard = tw(Skeleton)`
 `
 
 const HomePage = (): JSX.Element => {
-  const { data: productsList, isLoading, error } = useProducts({ pageNumber: 1 })
+  const { data: productsList } = useProducts({ pageNumber: 1 })
+
+  useEffect(() => {
+    document.title = 'Home | MKS Sistemas'
+  }, [])
 
   return (
     <>
@@ -41,8 +46,6 @@ const HomePage = (): JSX.Element => {
           ))
         )}
       </ShopWindow>
-
-      <Footer />
     </>
   )
 }
