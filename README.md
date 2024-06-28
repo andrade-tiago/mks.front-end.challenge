@@ -10,7 +10,7 @@ Este é o front-end do MKS Sistemas, uma pequena aplicação de e-commerce desen
 - Gerenciar seu carrinho:
    - Remover os produtos que não quiser mais;
    - Controlar a quantidade desejada de cada item;
-   - Finalizar a compra (removerá todos os itens do carrinho)
+   - Finalizar a compra (removerá todos os itens do carrinho).
 
 ## :hammer: Principais tecnologias (além de outras)
 
