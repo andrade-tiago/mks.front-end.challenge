@@ -4,6 +4,9 @@ import Product from "@/types/product"
 import currencyFormatter from "@/utils/currency-formatter"
 import useShoppingCartStore from "@/store/use-shopping-cart-store"
 import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
+import { Skeleton } from "@nextui-org/skeleton"
+import useProductImg from "@/hooks/use-product-img"
 
 const Wrapper = tw(motion.div)`
   max-w-56
@@ -19,6 +22,11 @@ const Container = tw.div`
 const ProductImage = tw.img`
   w-full max-h-36
   object-contain
+`
+const LoadingImage = tw(Skeleton)`
+  w-full h-36
+  rounded-lg
+  bg-gray-300
 `
 const Row = tw.div`
   flex gap-1 justify-between
@@ -58,19 +66,18 @@ type ProductCardProps = {
 
 const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
   const shoppingCart = useShoppingCartStore()
+  const { data: imgURL } = useProductImg(product.id)
 
-  const imgURL = 'https://images.tokopedia.net/img/cache/700/VqbcmM/2023/9/26/298ffbef-785d-4645-b6d8-9c3a739650b7.png'
-  const descriptionLengthLimit = 50
+  const descriptionLengthLimit = 45
 
   const handleAddToCart = () => {
     if (shoppingCart.containsItem(product.id)) {
       return
     }
-
     shoppingCart.addItem({
       id: product.id,
       name: product.name,
-      imgURL,
+      imgURL: imgURL as string,
       price: product.price,
       amount: 1,
     })
@@ -83,7 +90,11 @@ const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
     >
       <Container>
         <Column>
-          <ProductImage src={imgURL} />
+          {imgURL ? (
+            <ProductImage src={imgURL} />
+          ) : (
+            <LoadingImage />
+          )}
           <Row>
             <Title>
               {product.name}

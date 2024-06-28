@@ -45,7 +45,10 @@ const Button = tw.button`
   last:border-r-0
 `
 const UnitPrice = tw.span`
-  text-black text-sm font-bold
+  text-white md:text-black text-sm font-bold
+  max-md:bg-zinc-700
+  rounded-lg
+  px-1 py-2
   w-24
 `
 const RemoveItemButton = tw(CloseButton)`
@@ -60,8 +63,6 @@ type ShoppingCartListItemProps = {
 }
 
 const ShoppingCartListItem = ({ itemId }: ShoppingCartListItemProps): JSX.Element => {
-  const imgURL = 'https://images.tokopedia.net/img/cache/700/VqbcmM/2023/9/26/298ffbef-785d-4645-b6d8-9c3a739650b7.png'
-
   const shoppingCart = useShoppingCartStore()
   const item = useShoppingCartStore(state => state.items[state.getItemIndex(itemId)])
 
@@ -83,7 +84,7 @@ const ShoppingCartListItem = ({ itemId }: ShoppingCartListItemProps): JSX.Elemen
       initial={{ x: 300 }}
       animate={{ x: 0 }}
     >
-      <ItemImage src={imgURL} />
+      <ItemImage src={item.imgURL} />
 
       <Title>
         {item.name}
