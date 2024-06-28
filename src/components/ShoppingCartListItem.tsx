@@ -45,8 +45,8 @@ const Button = tw.button`
   last:border-r-0
 `
 const UnitPrice = tw.span`
-  text-white md:text-black text-sm font-bold
-  max-md:bg-zinc-700
+  text-white sm:text-black text-sm font-bold
+  max-sm:bg-zinc-700
   rounded-lg
   px-1 py-2
   w-24
