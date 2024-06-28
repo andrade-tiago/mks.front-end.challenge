@@ -8,8 +8,9 @@ type ShoppingCartStore = {
   items: CartItem[]
   addItem: (item: CartItem) => void
   addToItem: (id: number) => void
-  getItemIndex: (id: number) => number
+  clearItems: () => void
   containsItem: (id: number) => boolean
+  getItemIndex: (id: number) => number
   removeItem: (id: number) => void
   subtractFromItem: (id: number) => void
 }
@@ -30,6 +31,7 @@ const useShoppingCartStore = create<ShoppingCartStore>((set, get) => ({
       set(() => ({ items }))
     }
   },
+  clearItems: () => set(() => ({ items: [] })),
   containsItem: (id: number) => get().getItemIndex(id) !== -1,
   getItemIndex: (id: number) => get().items.findIndex(item => item.id === id),
   removeItem: (id: number) => {

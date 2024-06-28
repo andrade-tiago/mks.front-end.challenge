@@ -47,6 +47,10 @@ const ShoppingCartList = (): JSX.Element => {
     return acc + (item.amount * item.price)
   }, 0)
 
+  const handleFinalizePurchase = () => {
+    shoppingCart.clearItems()
+  }
+
   return (
     <AnimatePresence>
       {shoppingCart.isOpen && (
@@ -90,7 +94,7 @@ const ShoppingCartList = (): JSX.Element => {
               {currencyFormatter.format(totalPrice)}
             </Text>
           </Row>
-          <BuyButton>
+          <BuyButton onClick={handleFinalizePurchase}>
             <Text>
               Finalizar Compra
             </Text>
