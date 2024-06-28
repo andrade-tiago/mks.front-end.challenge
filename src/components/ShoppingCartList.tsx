@@ -25,7 +25,7 @@ const Title = tw(motion.h2)`
 `
 const ItemList = tw.ul`
   overflow-y-auto overflow-x-hidden
-  flex flex-col gap-4 flex-1
+  flex flex-col gap-4 flex-1 items-center
   px-12 py-8
 `
 const NoItems = tw.p`
@@ -35,6 +35,9 @@ const BuyButton = tw.button`
   bg-black
   w-full
   p-3
+`
+const CloseCartButton = tw(CloseButton)`
+  max-sm:text-primary
 `
 
 const ShoppingCartList = (): JSX.Element => {
@@ -60,7 +63,7 @@ const ShoppingCartList = (): JSX.Element => {
               Carrinho de compras
             </Title>
 
-            <CloseButton
+            <CloseCartButton
               size={20}
               onClick={() => shoppingCart.setIsOpen(false)}
             />
@@ -84,7 +87,7 @@ const ShoppingCartList = (): JSX.Element => {
             </Text>
 
             <Text>
-              {currencyFormatter.format(totalPrice).split(',')[0]}
+              {currencyFormatter.format(totalPrice)}
             </Text>
           </Row>
           <BuyButton>

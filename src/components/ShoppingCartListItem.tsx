@@ -7,14 +7,14 @@ import { motion } from "framer-motion"
 
 const Wrapper = tw(motion.li)`
   bg-white
-  w-full max-w-96
-  p-2
+  w-full max-w-64 sm:max-w-96
+  p-4 sm:p-2
   rounded-lg
-  flex gap-5 justify-between items-center
+  flex flex-col sm:flex-row gap-5 justify-between items-center
   relative
 `
 const ItemImage = tw.img`
-  w-12 h-16
+  w-full h-24 sm:w-12 sm:h-16
   object-contain
 `
 const Title = tw.h3`
@@ -24,8 +24,13 @@ const Title = tw.h3`
 const Column = tw.div`
   flex flex-col gap-1
 `
+const Row = tw.div`
+  flex gap-1 items-center justify-between
+  w-full
+`
 const AmountText = tw.span`
   text-black text-[10px] font-normal
+  hidden sm:visible
 `
 const ButtonGroup = tw.div`
   border-[1px] border-neutral-300 rounded-md
@@ -37,7 +42,6 @@ const ButtonGroup = tw.div`
 const Button = tw.button`
   text-black text-xs font-normal
   px-3
-
   last:border-r-0
 `
 const UnitPrice = tw.span`
@@ -45,8 +49,10 @@ const UnitPrice = tw.span`
   w-24
 `
 const RemoveItemButton = tw(CloseButton)`
-  absolute top-0 right-0
-  -translate-y-1/2 translate-x-1/2
+  absolute top-1 right-1 sm:top-0 sm:right-0
+  sm:-translate-y-1/2 sm:translate-x-1/2
+  bg-transparent sm:bg-black
+  text-black sm:text-white 
 `
 
 type ShoppingCartListItemProps = {
@@ -57,13 +63,13 @@ const ShoppingCartListItem = ({ itemId }: ShoppingCartListItemProps): JSX.Elemen
   const imgURL = 'https://images.tokopedia.net/img/cache/700/VqbcmM/2023/9/26/298ffbef-785d-4645-b6d8-9c3a739650b7.png'
 
   const shoppingCart = useShoppingCartStore()
-  const itemIndex = shoppingCart.getItemIndex(itemId)
+  const item = useShoppingCartStore(state => state.items[state.getItemIndex(itemId)])
 
   const handleAdd = () => {
     shoppingCart.addToItem(itemId)
   }
   const handleSubtract = () => {
-    if (shoppingCart.items[itemIndex].amount === 1) {
+    if (item.amount === 1) {
       return
     }
     shoppingCart.subtractFromItem(itemId)
@@ -76,35 +82,36 @@ const ShoppingCartListItem = ({ itemId }: ShoppingCartListItemProps): JSX.Elemen
     <Wrapper
       initial={{ x: 300 }}
       animate={{ x: 0 }}
-      
     >
       <ItemImage src={imgURL} />
 
       <Title>
-        {shoppingCart.items[itemIndex].name}
+        {item.name}
       </Title>
 
-      <Column>
-        <AmountText>Qtd:</AmountText>
+      <Row>
+        <Column>
+          <AmountText>Qtd:</AmountText>
 
-        <ButtonGroup>
-          <Button onClick={handleSubtract}>
-            <FiMinus />
-          </Button>
+          <ButtonGroup>
+            <Button onClick={handleSubtract}>
+              <FiMinus />
+            </Button>
 
-          <Button $as="output">
-            {shoppingCart.items[itemIndex].amount}
-          </Button>
+            <Button $as="output">
+              {item.amount}
+            </Button>
 
-          <Button onClick={handleAdd}>
-            <FiPlus />
-          </Button>
-        </ButtonGroup>
-      </Column>
+            <Button onClick={handleAdd}>
+              <FiPlus />
+            </Button>
+          </ButtonGroup>
+        </Column>
 
-      <UnitPrice>
-        {currencyFormatter.format(shoppingCart.items[itemIndex].price)}
-      </UnitPrice>
+        <UnitPrice>
+          {currencyFormatter.format(item.price)}
+        </UnitPrice>
+      </Row>
 
       <RemoveItemButton size={12} onClick={handleRemoveItem} />
     </Wrapper>
