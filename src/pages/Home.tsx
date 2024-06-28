@@ -4,12 +4,19 @@ import ProductCard from "@/components/ProductCard"
 import ShoppingCart from "@/components/ShoppingCart"
 import ShoppingCartList from "@/components/ShoppingCartList"
 import useProducts from "@/hooks/use-products"
+import { Skeleton } from "@nextui-org/skeleton"
 import tw from "tailwind-styled-components"
 
 const ShopWindow = tw.main`
   grid gap-x-3 gap-y-5 grid-cols-[repeat(auto-fit,224px)] justify-center
   max-w-5xl
   mx-auto my-10 px-2
+`
+const LoadingCard = tw(Skeleton)`
+  w-56 h-72
+  rounded-lg
+  border
+  bg-gray-300
 `
 
 const HomePage = (): JSX.Element => {
@@ -24,9 +31,13 @@ const HomePage = (): JSX.Element => {
       <ShoppingCartList />
 
       <ShopWindow>
-        {productsList?.products && (
+        {productsList?.products ? (
           productsList.products.map(item => (
             <ProductCard key={item.id} product={item} />
+          ))
+        ) : (
+          Array.from({ length: 8 }).map((_, index) => (
+            <LoadingCard key={index} />
           ))
         )}
       </ShopWindow>
