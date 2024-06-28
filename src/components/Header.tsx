@@ -9,7 +9,7 @@ const Wrapper = tw.header`
 `
 const Container = tw.div`
   max-w-7xl
-  px-2 py-4
+  mx-auto px-2 py-4
   flex justify-between items-center gap-4
 `
 
