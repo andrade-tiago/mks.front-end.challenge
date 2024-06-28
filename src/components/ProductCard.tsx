@@ -64,7 +64,7 @@ type ProductCardProps = {
   product: Product
 }
 
-const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const shoppingCart = useShoppingCartStore()
   const { data: imgURL } = useProductImg(product.id)
 

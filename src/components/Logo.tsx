@@ -8,7 +8,7 @@ const Wrapper = tw.div`
 const FirstName = tw.span`text-4xl font-semibold`
 const LastName = tw.span`text-xl font-light`
 
-const Logo = (): JSX.Element => {
+const Logo: React.FC = () => {
   return (
     <Wrapper>
       <FirstName>

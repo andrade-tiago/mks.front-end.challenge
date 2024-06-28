@@ -9,7 +9,7 @@ const CopyrightText = tw.p`
   text-black text-xs
 `
 
-const Footer = (): JSX.Element => {
+const Footer: React.FC = () => {
   return (
     <Wrapper>
       <CopyrightText>

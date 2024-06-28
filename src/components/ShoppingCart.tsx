@@ -12,7 +12,7 @@ const Wrapper = tw.button`
 `
 const ItemsAmount = tw.span`font-bold`
 
-const ShoppingCart = (): JSX.Element => {
+const ShoppingCart: React.FC = () => {
   const shoppingCart = useShoppingCartStore()
 
   return (

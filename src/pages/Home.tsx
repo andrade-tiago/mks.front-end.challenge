@@ -20,7 +20,7 @@ const LoadingCard = tw(Skeleton)`
   bg-gray-300
 `
 
-const HomePage = (): JSX.Element => {
+const HomePage: React.FC = () => {
   const { data: productsList } = useProducts({ pageNumber: 1 })
 
   useEffect(() => {

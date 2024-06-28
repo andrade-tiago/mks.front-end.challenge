@@ -17,7 +17,7 @@ type HeaderProps = {
   children?: ReactNode
 }
 
-const Header = ({ children }: HeaderProps): JSX.Element => {
+const Header: React.FC<HeaderProps> = ({ children }) => {
   return (
     <Wrapper>
       <Container>

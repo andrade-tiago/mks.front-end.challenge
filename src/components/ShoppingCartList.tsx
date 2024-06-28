@@ -40,7 +40,7 @@ const CloseCartButton = tw(CloseButton)`
   max-sm:text-primary
 `
 
-const ShoppingCartList = (): JSX.Element => {
+const ShoppingCartList: React.FC = () => {
   const shoppingCart = useShoppingCartStore()
 
   const totalPrice = shoppingCart.items.reduce((acc, item) => {

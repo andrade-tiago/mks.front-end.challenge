@@ -62,7 +62,7 @@ type ShoppingCartListItemProps = {
   itemId: number
 }
 
-const ShoppingCartListItem = ({ itemId }: ShoppingCartListItemProps): JSX.Element => {
+const ShoppingCartListItem: React.FC<ShoppingCartListItemProps> = ({ itemId }) => {
   const shoppingCart = useShoppingCartStore()
   const item = useShoppingCartStore(state => state.items[state.getItemIndex(itemId)])
 

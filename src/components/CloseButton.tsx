@@ -13,7 +13,7 @@ type CloseButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   size: number
 }
 
-const CloseButton = ({size, ...props}: CloseButtonProps): JSX.Element => {
+const CloseButton: React.FC<CloseButtonProps> = ({size, ...props}) => {
   return (
     <Wrapper {...props}>
       <MdClose size={size} />
