@@ -3,8 +3,9 @@ import tw from "tailwind-styled-components"
 import CloseButton from "./CloseButton"
 import useShoppingCartStore from "@/store/use-shopping-cart-store"
 import currencyFormatter from "@/utils/currency-formatter"
-import { motion } from "framer-motion"
+import { HTMLMotionProps, motion } from "framer-motion"
 import PriceTag from "./PriceTag"
+import CartItem from "@/types/cart-item"
 
 const Wrapper = tw(motion.li)`
   bg-white
@@ -58,32 +59,28 @@ const RemoveItemButton = tw(CloseButton)`
   max-sm:text-black max-sm:text-3xl
 `
 
-type ShoppingCartListItemProps = {
-  itemId: number
+type ShoppingCartListItemProps = HTMLMotionProps<"li"> & {
+  item: CartItem
 }
 
-const ShoppingCartListItem: React.FC<ShoppingCartListItemProps> = ({ itemId }) => {
+const ShoppingCartListItem: React.FC<ShoppingCartListItemProps> = ({ item, ...props }) => {
   const shoppingCart = useShoppingCartStore()
-  const item = useShoppingCartStore(state => state.items[state.getItemIndex(itemId)])
 
   const handleAdd = () => {
-    shoppingCart.addToItem(itemId)
+    shoppingCart.addToItem(item.id)
   }
   const handleSubtract = () => {
     if (item.amount === 1) {
       return
     }
-    shoppingCart.subtractFromItem(itemId)
+    shoppingCart.subtractFromItem(item.id)
   }
   const handleRemoveItem = () => {
-    shoppingCart.removeItem(itemId)
+    shoppingCart.removeItem(item.id)
   }
 
   return (
-    <Wrapper
-      initial={{ x: 500 }}
-      animate={{ x: 0 }}
-    >
+    <Wrapper {...props}>
       <ItemImage src={item.imgURL} />
 
       <Title>

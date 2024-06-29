@@ -90,18 +90,26 @@ const ShoppingCartList: React.FC = () => {
           </Row>
 
           <ItemList>
-            {shoppingCart.items.length > 0 ? (
-              shoppingCart.items.map(item => (
-                <ShoppingCartListItem key={item.id} itemId={item.id} />
-              ))
-            ) : (
-              <NoItems
-                {...animations.display}
-                transition={{ delay: .6 }}
-              >
-                Adicione itens para visualizá-los no carrinho
-              </NoItems>
-            )}
+            <AnimatePresence>
+              {shoppingCart.items.length > 0 ? (
+                shoppingCart.items.map(item => (
+                  <ShoppingCartListItem
+                    initial={{ x: 500 }}
+                    animate={{ x: 0 }}
+                    exit={{ x: -500, opacity: 0 }}
+                    key={item.id}
+                    item={item}
+                  />
+                ))
+              ) : (
+                <NoItems
+                  {...animations.display}
+                  transition={{ delay: .6 }}
+                >
+                  Adicione itens para visualizá-los no carrinho
+                </NoItems>
+              )}
+            </AnimatePresence>
           </ItemList>
 
           <Row
