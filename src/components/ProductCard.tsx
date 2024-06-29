@@ -4,7 +4,6 @@ import Product from "@/types/product"
 import currencyFormatter from "@/utils/currency-formatter"
 import useShoppingCartStore from "@/store/use-shopping-cart-store"
 import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
 import { Skeleton } from "@nextui-org/skeleton"
 import useProductImg from "@/hooks/use-product-img"
 
