@@ -2,8 +2,8 @@ import Header from "@/components/Header"
 import ProductCard from "@/components/ProductCard"
 import ShoppingCart from "@/components/ShoppingCart"
 import ShoppingCartList from "@/components/ShoppingCartList"
+import Skeleton from "@/components/Skeleton"
 import useProducts from "@/hooks/use-products"
-import { Skeleton } from "@nextui-org/skeleton"
 import { useEffect } from "react"
 import tw from "tailwind-styled-components"
 
@@ -14,9 +14,6 @@ const ShopWindow = tw.main`
 `
 const LoadingCard = tw(Skeleton)`
   w-56 h-72
-  rounded-lg
-  border
-  bg-gray-300
 `
 
 const HomePage: React.FC = () => {

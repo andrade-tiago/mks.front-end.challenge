@@ -4,8 +4,8 @@ import Product from "@/types/product"
 import currencyFormatter from "@/utils/currency-formatter"
 import useShoppingCartStore from "@/store/use-shopping-cart-store"
 import { motion } from "framer-motion"
-import { Skeleton } from "@nextui-org/skeleton"
 import useProductImg from "@/hooks/use-product-img"
+import Skeleton from "./Skeleton"
 
 const Wrapper = tw(motion.div)`
   max-w-56
@@ -19,13 +19,11 @@ const Container = tw.div`
   flex flex-col gap-3 flex-1 justify-between
 `
 const ProductImage = tw.img`
-  w-full max-h-36
+  w-full h-36
   object-contain
 `
 const LoadingImage = tw(Skeleton)`
   w-full h-36
-  rounded-lg
-  bg-gray-300
 `
 const Row = tw.div`
   flex gap-1 justify-between
@@ -84,8 +82,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <Wrapper
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1 }}
     >
       <Container>
         <Column>

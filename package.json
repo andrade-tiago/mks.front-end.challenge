@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@nextui-org/skeleton": "^2.0.29",
     "axios": "^1.7.2",
     "framer-motion": "^11.2.12",
     "react": "^18.3.1",
