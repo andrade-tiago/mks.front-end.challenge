@@ -1,7 +1,8 @@
+import { HTMLMotionProps, motion } from "framer-motion"
 import { MdClose } from "react-icons/md"
 import tw from "tailwind-styled-components"
 
-const Wrapper = tw.button`
+const Wrapper = tw(motion.button)`
   bg-black
   text-white
   rounded-full
@@ -9,14 +10,12 @@ const Wrapper = tw.button`
   p-1
 `
 
-type CloseButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  size: number
-}
+type CloseButtonProps = HTMLMotionProps<"button">
 
-const CloseButton: React.FC<CloseButtonProps> = ({size, ...props}) => {
+const CloseButton: React.FC<CloseButtonProps> = (props) => {
   return (
     <Wrapper {...props}>
-      <MdClose size={size} />
+      <MdClose />
     </Wrapper>
   )
 }

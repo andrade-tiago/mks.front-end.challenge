@@ -4,15 +4,16 @@ import ShoppingCartListItem from "./ShoppingCartListItem"
 import useShoppingCartStore from "@/store/use-shopping-cart-store"
 import { AnimatePresence, motion } from "framer-motion"
 import currencyFormatter from "@/utils/currency-formatter"
+import { useEffect } from "react"
 
 const Wrapper = tw(motion.div)`
   fixed top-0 right-0
   bg-primary
   shadow-2xl
-  w-full max-w-lg h-screen
+  w-full max-w-sm sm:max-w-lg h-screen
   flex flex-col
 `
-const Row = tw.div`
+const Row = tw(motion.div)`
   flex justify-between
   px-12 py-8
 `
@@ -28,16 +29,17 @@ const ItemList = tw.ul`
   flex flex-col gap-4 flex-1 items-center
   px-12 py-8
 `
-const NoItems = tw.p`
+const NoItems = tw(motion.p)`
   text-gray-200 text-md font-normal text-center
 `
-const BuyButton = tw.button`
+const BuyButton = tw(motion.button)`
   bg-black
   w-full
   p-3
 `
 const CloseCartButton = tw(CloseButton)`
-  max-sm:text-primary
+  max-sm:text-primary text-3xl
+  translate-x-1/2
 `
 
 const ShoppingCartList: React.FC = () => {
@@ -47,9 +49,20 @@ const ShoppingCartList: React.FC = () => {
     return acc + (item.amount * item.price)
   }, 0)
 
+  const animations = {
+    display: {
+      initial: { opacity: 0 },
+      animate: { opacity: 1 },
+    },
+  }
+
   const handleFinalizePurchase = () => {
     shoppingCart.clearItems()
   }
+
+  useEffect(() => {
+    return () => shoppingCart.setIsOpen(false)
+  }, [])
 
   return (
     <AnimatePresence>
@@ -61,14 +74,15 @@ const ShoppingCartList: React.FC = () => {
         >
           <Row>
             <Title
-              initial={{ y: -200 }}
-              animate={{ y: 0 }}
+              initial={{ y: -300, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
             >
               Carrinho de compras
             </Title>
 
             <CloseCartButton
-              size={20}
+              {...animations.display}
+              transition={{ delay: .5 }}
               onClick={() => shoppingCart.setIsOpen(false)}
             />
           </Row>
@@ -79,13 +93,19 @@ const ShoppingCartList: React.FC = () => {
                 <ShoppingCartListItem key={item.id} itemId={item.id} />
               ))
             ) : (
-              <NoItems>
+              <NoItems
+                {...animations.display}
+                transition={{ delay: .6 }}
+              >
                 Adicione itens para visualizá-los no carrinho
               </NoItems>
             )}
           </ItemList>
 
-          <Row>
+          <Row
+            {...animations.display}
+            transition={{ delay: .7 }}
+          >
             <Text>
               Total:
             </Text>
@@ -94,7 +114,11 @@ const ShoppingCartList: React.FC = () => {
               {currencyFormatter.format(totalPrice)}
             </Text>
           </Row>
-          <BuyButton onClick={handleFinalizePurchase}>
+          <BuyButton
+            {...animations.display}
+            transition={{ delay: .9, duration: .5 }}
+            onClick={handleFinalizePurchase}
+          >
             <Text>
               Finalizar Compra
             </Text>

@@ -54,8 +54,8 @@ const UnitPrice = tw.span`
 const RemoveItemButton = tw(CloseButton)`
   absolute top-1 right-1 sm:top-0 sm:right-0
   sm:-translate-y-1/2 sm:translate-x-1/2
-  bg-transparent sm:bg-black
-  text-black sm:text-white 
+  max-sm:bg-transparent
+  max-sm:text-black max-sm:text-3xl
 `
 
 type ShoppingCartListItemProps = {
@@ -81,7 +81,7 @@ const ShoppingCartListItem: React.FC<ShoppingCartListItemProps> = ({ itemId }) =
 
   return (
     <Wrapper
-      initial={{ x: 300 }}
+      initial={{ x: 500 }}
       animate={{ x: 0 }}
     >
       <ItemImage src={item.imgURL} />
@@ -114,7 +114,7 @@ const ShoppingCartListItem: React.FC<ShoppingCartListItemProps> = ({ itemId }) =
         </UnitPrice>
       </Row>
 
-      <RemoveItemButton size={12} onClick={handleRemoveItem} />
+      <RemoveItemButton onClick={handleRemoveItem} />
     </Wrapper>
   )
 }
