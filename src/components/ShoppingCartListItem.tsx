@@ -111,7 +111,12 @@ const ShoppingCartListItem: React.FC<ShoppingCartListItemProps> = ({ item, ...pr
         </UnitPrice>
       </Row>
 
-      <RemoveItemButton onClick={handleRemoveItem} />
+      <RemoveItemButton
+        onClick={handleRemoveItem}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: .5 }}
+      />
     </Wrapper>
   )
 }
