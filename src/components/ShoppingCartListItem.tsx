@@ -4,6 +4,7 @@ import CloseButton from "./CloseButton"
 import useShoppingCartStore from "@/store/use-shopping-cart-store"
 import currencyFormatter from "@/utils/currency-formatter"
 import { motion } from "framer-motion"
+import PriceTag from "./PriceTag"
 
 const Wrapper = tw(motion.li)`
   bg-white
@@ -44,11 +45,10 @@ const Button = tw.button`
   px-3
   last:border-r-0
 `
-const UnitPrice = tw.span`
-  text-white sm:text-black text-sm font-bold
-  max-sm:bg-zinc-700
-  rounded-lg
-  px-1 py-2
+const UnitPrice = tw(PriceTag)`
+  sm:text-black text-sm
+  sm:bg-transparent
+  py-2
   w-24
 `
 const RemoveItemButton = tw(CloseButton)`

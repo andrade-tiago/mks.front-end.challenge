@@ -6,6 +6,7 @@ import useShoppingCartStore from "@/store/use-shopping-cart-store"
 import { motion } from "framer-motion"
 import useProductImg from "@/hooks/use-product-img"
 import Skeleton from "./Skeleton"
+import PriceTag from "./PriceTag"
 
 const Wrapper = tw(motion.div)`
   max-w-56
@@ -34,13 +35,6 @@ const Column = tw.div`
 const Title = tw.h3`
   flex-1
   text-black text-base font-normal
-`
-const Price = tw.span`
-  bg-zinc-700
-  text-white text-base font-bold
-  rounded-md
-  px-1
-  min-w-16 w-max h-max
 `
 const Description = tw.p`
   text-zinc-700 text-xs font-light
@@ -97,9 +91,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <Title>
               {product.name}
             </Title>
-            <Price>
+            <PriceTag>
               {currencyFormatter.format(product.price)}
-            </Price>
+            </PriceTag>
           </Row>
         </Column>
 
