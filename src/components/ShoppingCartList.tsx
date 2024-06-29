@@ -32,8 +32,10 @@ const ItemList = tw.ul`
 const NoItems = tw(motion.p)`
   text-gray-200 text-md font-normal text-center
 `
-const BuyButton = tw(motion.button)`
-  bg-black
+const FinalizePurchaseButton = tw(motion.button)`
+  bg-black disabled:bg-transparent
+  border-2 border-dashed border-transparent disabled:border-gray-300
+  transition-colors
   w-full
   p-3
 `
@@ -114,15 +116,16 @@ const ShoppingCartList: React.FC = () => {
               {currencyFormatter.format(totalPrice)}
             </Text>
           </Row>
-          <BuyButton
+          <FinalizePurchaseButton
             {...animations.display}
             transition={{ delay: .9, duration: .5 }}
             onClick={handleFinalizePurchase}
+            disabled={shoppingCart.items.length === 0}
           >
             <Text>
               Finalizar Compra
             </Text>
-          </BuyButton>
+          </FinalizePurchaseButton>
         </Wrapper>
       )}
     </AnimatePresence>
