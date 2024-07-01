@@ -4,6 +4,8 @@ Este é o front-end do MKS Sistemas, uma pequena aplicação de e-commerce desen
 
 ![Screenshot](./public/img/screenshot.png)
 
+Você pode asistir a uma demonstração de seu funcionamento no [YouTube](https://www.youtube.com/watch?v=ulTO1UfYhlY).
+
 ## :credit_card: Features
 
 - Adicionar os produtos desejados ao carrinho;
